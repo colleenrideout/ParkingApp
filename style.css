@@ -23,10 +23,33 @@ h1 {
   padding: 0 3rem;
 }
 
+.topbar {
+  background-image: url("van.jpg");
+  background-position: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  font-size: 20px;
+  text-align: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
 #map {
-  height: 75vh;
+  padding-left: 100px;
+  padding-bottom: 30px;
 }
 
 .gm-style-iw-d {
   color: #000000;
+}
+
+#parklist {
+  align-items: right;
+  outline: black;
+}
+
+.parktitle {
+  font-size: 80px;
+  color: white;
 }

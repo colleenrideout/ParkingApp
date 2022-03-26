@@ -12,7 +12,41 @@ function initMap() {
 		streetViewControl: false,
 	});
 
+    let amount = 5;
+
+    const markers = [
+		[
+			("Rate:" + " $" + amount),
+			49.2827,
+			-123.1207,
+		],
+	];
+
+	for (let i = 0; i < markers.length; i++) {
+		const currMarker = markers[i];
+
+        const image = "dog.png";
+
+		const marker = new google.maps.Marker({
+			position: { lat: currMarker[1], lng: currMarker[2] },
+			map,
+			title: currMarker[0],
+			icon: image,
+			animation: google.maps.Animation.DROP,
+		});
+
+		const infowindow = new google.maps.InfoWindow({
+			content: currMarker[0],
+		});
+
+		marker.addListener('click', () => {
+			infowindow.open(map, marker);
+		});
+	}
+
 }
+
+
 
 // function myFunction() {
 //     map = new google.maps.Map(document.getElementById('map'), {
