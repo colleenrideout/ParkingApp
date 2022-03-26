@@ -1,5 +1,5 @@
-#Park Pal
-##Find affordable parking near you
+Park Pal
+Find affordable parking near you
 
 ***Want to drive into the city, but don't want to deal with trying to find afforable parking?***
 *Park Pal* is here to help! 
