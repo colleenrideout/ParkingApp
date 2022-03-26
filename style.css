@@ -33,6 +33,7 @@ h1 {
   text-align: center;
   background-repeat: no-repeat;
   color: white;
+  border-bottom: 30px solid rgb(58,81,194);
 }
 
 #map {
@@ -58,5 +59,19 @@ h1 {
 
 .map-list {
   border: 30px;
-  border-color: black;
+  border-color: rgba(5, 13, 138, 0.808);
+}
+
+.map-border {
+  border-top: 30px solid rgb(58,81,194);
+  border-bottom: 30px solid rgb(58,81,194);
+}
+
+.default-message {
+  color: rgb(0, 0, 0);
+  height: 550px;
+  font-size: 85px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  background-color: rgb(255, 255, 255);
 }

@@ -1,3 +1,7 @@
+
+
+
+
 function initMap() {
 	// Update MAP_ID with custom map ID
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -45,6 +49,80 @@ function initMap() {
 	}
 
 }
+
+function distList() {
+	console.log("hi it works");
+	//filter for distance
+
+	const myNode = document.getElementById("list-container");
+	while (myNode.firstChild) {
+  myNode.removeChild(myNode.lastChild);
+}
+
+	var div = document.createElement("div");
+	div.id= 1234;
+	div.style.height = "100px";
+	div.style.background = "red";
+	div.style.color = "white";
+	div.innerHTML = "Hello";
+	console.log(div.id);
+	div.addEventListener('click', function handleClick(event) {
+  	console.log('element clicked 🎉🎉🎉', event);
+	  //replace console log with centre on map??
+	});
+
+	document.getElementById("list-container").appendChild(div);
+}
+
+function timeList() {
+	console.log("hi it works");
+	//filter for distance
+
+	const myNode = document.getElementById("list-container");
+	while (myNode.firstChild) {
+  	myNode.removeChild(myNode.lastChild);
+	}
+
+	var div = document.createElement("div");
+	div.id= 1234;
+	div.style.height = "100px";
+	div.style.background = "red";
+	div.style.color = "white";
+	div.innerHTML = "lkh";
+	console.log(div.id);
+	div.addEventListener('click', function handleClick(event) {
+  	console.log('element clicked 🎉🎉🎉', event);
+	  //replace console log with centre on map??
+	});
+
+	document.getElementById("list-container").appendChild(div);
+}
+
+
+function priceList() {
+	console.log("hi it works");
+	//filter for distance
+
+	const myNode = document.getElementById("list-container");
+  	while (myNode.firstChild) {
+    myNode.removeChild(myNode.lastChild);
+  	}
+
+	var div = document.createElement("div");
+	div.id= 1234;
+	div.style.height = "100px";
+	div.style.background = "red";
+	div.style.color = "white";
+	div.innerHTML = "likugh";
+	console.log(div.id);
+	div.addEventListener('click', function handleClick(event) {
+  	console.log('element clicked 🎉🎉🎉', event);
+	  //replace console log with centre on map??
+	});
+
+	document.getElementById("list-container").appendChild(div);
+}
+
 
 
 
