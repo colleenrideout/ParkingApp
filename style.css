@@ -36,7 +36,9 @@ h1 {
 }
 
 #map {
-  padding-left: 100px;
+  height: 75vh;
+  width: 80vh;
+  padding-top: 30px;
   padding-bottom: 30px;
 }
 
@@ -52,4 +54,9 @@ h1 {
 .parktitle {
   font-size: 80px;
   color: white;
+}
+
+.map-list {
+  border: 30px;
+  border-color: black;
 }
