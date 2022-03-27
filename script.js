@@ -65,8 +65,8 @@ function initMap() {
 // GETTING API DATA
 
 function callApi(lat, long) { 
-	var dist = 500;
-	var url = `https://opendata.vancouver.ca/api/records/1.0/search/?dataset=parking-meters&q=&rows=20&facet=r_mf_9a_6p&facet=r_mf_6p_10&facet=r_sa_9a_6p&facet=r_sa_6p_10&facet=r_su_9a_6p&facet=r_su_6p_10&facet=timeineffe&facet=t_mf_9a_6p&facet=t_mf_6p_10&facet=t_sa_9a_6p&facet=t_sa_6p_10&facet=t_su_9a_6p&facet=t_su_6p_10&facet=creditcard&facet=geo_local_area&geofilter.distance=${lat}%2C+${long}%2C${dist}`  
+	var dist = 3000;
+	var url = `https://opendata.vancouver.ca/api/records/1.0/search/?dataset=parking-meters&q=&rows=150&facet=r_mf_9a_6p&facet=r_mf_6p_10&facet=r_sa_9a_6p&facet=r_sa_6p_10&facet=r_su_9a_6p&facet=r_su_6p_10&facet=timeineffe&facet=t_mf_9a_6p&facet=t_mf_6p_10&facet=t_sa_9a_6p&facet=t_sa_6p_10&facet=t_su_9a_6p&facet=t_su_6p_10&facet=creditcard&facet=geo_local_area&geofilter.distance=${lat}%2C+${long}%2C${dist}`  
         fetch(url)
             .then((response) => response.json())
             .then((data) => makeArray(data))
