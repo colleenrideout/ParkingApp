@@ -24,7 +24,7 @@ function initMap() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: myLatlng,
 		zoom: 16,
-		mapId: 'MAP_ID',
+		mapId: '13f56e42ad8ec389',
 		mapTypeControl: false,
 		fullscreenControl: false,
 		streetViewControl: false,
