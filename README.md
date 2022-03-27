@@ -9,6 +9,7 @@ ParkPal is here to help!
 - View the price per hour based on the current time and day of the week
 - Find single or double spots, in case you're meeting up with friends
 - View the maximum time allowed to park in each space
+- Search for parking spots with extended an stay option (2+ hours)
 
 *Created by:*
 - Oliver Cowley - Backend
