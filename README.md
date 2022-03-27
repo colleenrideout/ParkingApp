@@ -1,9 +1,9 @@
-# Park Pal
+# ParkPal
 ## Find affordable parking near you
 
 ***Want to drive into the city, but don't want to deal with trying to find afforable parking?***
 
-Park Pal is here to help! 
+ParkPal is here to help! 
 
 - Search for parking spots by location throughout Vancouver
 - View the price per hour based on the current time and day of the week
