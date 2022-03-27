@@ -102,10 +102,17 @@ h1 {
   font-size: 16px;
 }
 
-.bottom {
+.bottom1 {
   height: 50px;
   text-align: center;
   font-family: "Raleway", sans-serif;
   font-weight: bold;
   padding-top: 14px;
+}
+
+.bottom2 {
+  height: 50px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
