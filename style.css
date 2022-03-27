@@ -29,11 +29,12 @@ h1 {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   background-repeat: no-repeat;
   color: white;
   border-bottom: 30px solid rgb(58, 81, 194);
+  font-family: "Raleway", sans-serif;
 }
 
 #map {
@@ -55,6 +56,8 @@ h1 {
 .parktitle {
   font-size: 80px;
   color: white;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
 
 .map-list {
@@ -82,4 +85,27 @@ h1 {
   font-size: 20px;
   text-align: center;
   font-family: "Raleway", sans-serif;
+}
+
+.middle {
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.but {
+  width: 100px;
+  font-weight: bold;
+}
+
+.bigger {
+  font-size: 16px;
+}
+
+.bottom {
+  height: 50px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  padding-top: 14px;
 }
