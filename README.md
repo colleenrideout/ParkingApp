@@ -12,8 +12,8 @@ ParkPal is here to help!
 - Search for parking spots with extended an stay option (2+ hours)
 
 *Created by:*
-- Oliver Cowley - Backend
-- Emily Guest - Frontend
-- Will Gumboc - Frontend
-- Colleen Rideout  - Frontend
-- Harvey Wu - Backend
+- Oliver Cowley 
+- Emily Guest
+- Will Gumboc 
+- Colleen Rideout 
+- Harvey Wu 
