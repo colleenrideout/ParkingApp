@@ -3,6 +3,7 @@ var returnedDataFull = [];
 var currentDisplayedData = [];
 let markers = [];
 let infoWindows = [];
+
 const d = new Date();
 const svgMarker = {
     path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
@@ -12,6 +13,25 @@ const svgMarker = {
     rotation: 0,
     scale: 2
   };
+  const svgMarkerYellow = {
+    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+    fillColor: "#ffd633",
+    fillOpacity: 0.8,
+    strokeWeight: 0.1,
+    rotation: 0,
+    scale: 2
+  };
+  const svgMarkerRed = {
+    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+    fillColor: "red",
+    fillOpacity: 0.8,
+    strokeWeight: 0.1,
+    rotation: 0,
+    scale: 2
+  };
+
+var currentViewableMax;
+var currentViewableMin;
 
 // STARTING POSITION
 const myLatlng = {lat: 49.2827, lng: -123.1207,};
@@ -48,7 +68,7 @@ function initMap() {
 
 	//SORTING FOR PRICE
 	google.maps.event.addDomListener(document.getElementById('priceList'), "click", () => {
-		currentDisplayedData = sort_by_price();
+
 		addTenMarkers(map, currentDisplayedData);
 	});
 
@@ -74,7 +94,20 @@ function callApi(lat, long) {
 
 function makeArray(data) {
     returnedDataFull = data.records;
+	currentDisplayedData = sort_by_price();
+	setMinMax();
 	addMarkers(map, returnedDataFull);
+	
+}
+
+function setMinMax() {
+	currentViewableMin = returnFloatPrice(currentDisplayedData[0]);
+	currentViewableMax = returnFloatPrice(currentDisplayedData[currentDisplayedData.length-1]);
+}
+
+function returnFloatPrice(data) {
+	var str = get_price(data);
+	return parseFloat(str.substring(1));
 }
 
 
@@ -105,25 +138,19 @@ function addMarkers(map, array) {
 	for (i = 0; i < array.length; i++) {
 		var coords = array[i]['fields']['geom']['coordinates']
 		
-
 		var pos = {lat: coords[1], lng: coords[0]};
 
-		var contentString = 
-	  	'<center>' +
-        '<b>Price (hr): </b> '+ get_price(array[i]) +' <br>' +
-        '<b>Max Parking Time: </b> '+  get_max_time(array[i]) +' <br>' +
-        '<b>Type: </b> '+ get_type(array[i]) +' <br>' +
-        '<b>Neighbourhood: </b> '+ get_neighbourhood(array[i]) +' <br>' +
-    	'</center>'
+		var contentString = getContentString(array[i]);
 
 		const newInfoWindow = new google.maps.InfoWindow({
 			content: contentString,
 		});
 		const newMarker = new google.maps.Marker({
 			position: pos,
-			icon: svgMarker,
+			icon: returnFloatPrice(array[i]) - currentViewableMin < (currentViewableMax - currentViewableMin) / 3 ? svgMarker : 
+							returnFloatPrice(array[i]) - currentViewableMin < (currentViewableMax - currentViewableMin) * 2 / 3 ? svgMarkerYellow : svgMarkerRed,
 			map: map,
-			title: "Hi"
+			title: "Main Marker"
 		});
 		newMarker.addListener("click", () => {
 			closeWindows(map);
@@ -144,16 +171,9 @@ function addTenMarkers(map, array) {
 	for (i = 0; i < array.length && i < 10; i++) {
 		var coords = array[i]['fields']['geom']['coordinates']
 		
-
 		var pos = {lat: coords[1], lng: coords[0]};
 
-		var contentString = 
-	  	'<center>' +
-        '<b>Price (hr): </b> '+ get_price(array[i]) +' <br>' +
-        '<b>Max Parking Time: </b> '+  get_max_time(array[i]) +' <br>' +
-        '<b>Type: </b> '+ get_type(array[i]) +' <br>' +
-        '<b>Neighbourhood: </b> '+ get_neighbourhood(array[i]) +' <br>' +
-    	'</center>'
+		var contentString = getContentString(array[i]);
 
 		const newInfoWindow = new google.maps.InfoWindow({
 			content: contentString,
@@ -162,7 +182,7 @@ function addTenMarkers(map, array) {
 			position: pos,
 			icon: svgMarker,
 			map: map,
-			title: "Hi"
+			title: "Top 10 Marker"
 		});
 		newMarker.addListener("click", () => {
 			closeWindows(map);
@@ -195,6 +215,17 @@ function clearMarkers() {
 
 // INFOWINDOW TEXT GETTERS
 
+function getContentString(data) {
+	var str = '<center>' +
+    '<b>Price (hr): </b> '+ get_price(data) +' <br>' +
+    '<b>Max Parking Time: </b> '+  get_max_time(data) +' <br>' +
+    '<b>Type: </b> '+ get_type(data) +' <br>' +
+    '<b>Neighbourhood: </b> '+ get_neighbourhood(data) +' <br>' +
+	'<b>' + data['fields']['timeineffe'] +
+    '</center>'
+	return str;
+}
+
 function get_price(meter) {
 	var day = d.getDay();
 	var time = d.getHours();
@@ -208,6 +239,8 @@ function get_price(meter) {
 		} else if (time >= 9 && time <= 17){
 			// 9am to 6pm
 			return meter.fields.r_mf_9a_6p;
+		} else {
+			return 'Price unavailable right now';
 		}
 	} else if (day == 6) {
 		if (time >= 18 && time <= 22) {
@@ -218,6 +251,9 @@ function get_price(meter) {
 			// 9am to 6pm
 			return meter.fields.r_sa_6p_10;
 		}
+		else {
+			return 'Price unavailable right now';
+		}
 	} else {
 		if (time >= 18 && time <= 22) {
 			// 6pm to 10pm
@@ -226,6 +262,9 @@ function get_price(meter) {
 		} else if (time >= 9 && time <= 17){
 			// 9am to 6pm
 			return meter.fields.r_su_9a_6p;
+		}
+		else {
+			return 'Price unavailable right now';
 		}
 	}
 }
@@ -243,6 +282,8 @@ function get_max_time(meter) {
 		} else if (time >= 9 && time <= 17){
 			// 9am to 6pm
 			return meter.fields.t_mf_9a_6p;
+		} else {
+			return 'Max time unavailable right now';
 		}
 	} else if (day == 6) {
 		if (time >= 18 && time <= 22) {
@@ -252,6 +293,8 @@ function get_max_time(meter) {
 		} else if (time >= 9 && time <= 17){
 			// 9am to 6pm
 			return meter.fields.t_sa_6p_10;
+		} else {
+			return 'Max time unavailable right now';
 		}
 	} else {
 		if (time >= 18 && time <= 22) {
@@ -261,6 +304,8 @@ function get_max_time(meter) {
 		} else if (time >= 9 && time <= 17){
 			// 9am to 6pm
 			return meter.fields.t_su_9a_6p;
+		} else {
+			return 'Max time unavailable right now';
 		}
 	}
 }
@@ -311,8 +356,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_mf_6p_10.slice(1)) > parseInt(b.fields.r_mf_6p_10.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_mf_6p_10.slice(1)) < parseInt(b.fields.r_mf_6p_10.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 
 		} else if (time >= 9 && time <= 17){
@@ -320,8 +367,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_mf_9a_6p.slice(1)) > parseInt(b.fields.r_mf_9a_6p.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_mf_9a_6p.slice(1)) < parseInt(b.fields.r_mf_9a_6p.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 		}
 	} else if (day == 6) {
@@ -330,8 +379,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_sa_6p_10.slice(1)) > parseInt(b.fields.r_sa_6p_10.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_sa_6p_10.slice(1)) < parseInt(b.fields.r_sa_6p_10.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 
 		} else if (time >= 9 && time <= 17){
@@ -339,8 +390,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_sa_9a_6p.slice(1)) > parseInt(b.fields.r_sa_9a_6p.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_sa_9a_6p.slice(1)) < parseInt(b.fields.r_sa_9a_6p.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 		}
 	} else {
@@ -349,8 +402,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_su_6p_10.slice(1)) > parseInt(b.fields.r_su_6p_10.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_su_6p_10.slice(1)) < parseInt(b.fields.r_su_6p_10.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 
 		} else if (time >= 9 && time <= 17){
@@ -358,8 +413,10 @@ function compare_price(a, b) {
 			if (parseInt(a.fields.r_su_9a_6p.slice(1)) > parseInt(b.fields.r_su_9a_6p.slice(1))) {
 				// a before b
 				return 1;
-			} else {
+			} else if (parseInt(a.fields.r_su_9a_6p.slice(1)) < parseInt(b.fields.r_su_9a_6p.slice(1))) {
 				return -1;
+			} else {
+				return 0;
 			}
 		}
 	}
