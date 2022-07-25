@@ -29,10 +29,12 @@ h1 {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   background-repeat: no-repeat;
   color: white;
+  border-bottom: 30px solid rgb(58, 81, 194);
+  font-family: "Raleway", sans-serif;
 }
 
 #map {
@@ -54,9 +56,63 @@ h1 {
 .parktitle {
   font-size: 80px;
   color: white;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
 
 .map-list {
   border: 30px;
-  border-color: black;
+  border-color: rgba(5, 13, 138, 0.808);
+}
+
+.map-border {
+  border-top: 30px solid rgb(58, 81, 194);
+  border-bottom: 30px solid rgb(58, 81, 194);
+}
+
+.default-message {
+  color: rgb(0, 0, 0);
+  height: 550px;
+  font-size: 85px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  background-color: rgb(255, 255, 255);
+}
+
+.listClass {
+  color: rgb(0, 0, 0);
+  height: 100px;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+}
+
+.middle {
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.but {
+  width: 100px;
+  font-weight: bold;
+}
+
+.bigger {
+  font-size: 16px;
+}
+
+.bottom1 {
+  height: 50px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  padding-top: 14px;
+}
+
+.bottom2 {
+  height: 50px;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
